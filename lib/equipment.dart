@@ -1,1 +1,0 @@
-// Machine à laver OU à sécher (IMPLEMENTS)

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:laverie_cs_app/widgets/Equipment.dart';
 
 void main() => runApp(LaverieApp());
 
@@ -7,26 +8,89 @@ class LaverieApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: DefaultTabController(
-          length: 3,
-          child: Scaffold(
-            appBar: AppBar(
-              bottom: TabBar(
-                tabs: [
-                  Tab(text: "Rés 1"),
-                  Tab(text: "Rés 4B"),
-                  Tab(text: "Rés 4DD"),
-                ],
-              ),
-              title: Text('Laverie CS'),
-            ),
-            body: TabBarView(
-              children: [
-                Image.asset('assets/images/app_icon.jpg'),
-                Icon(Icons.directions_transit),
-                Icon(Icons.directions_bike),
+        length: 3,
+        child: Scaffold(
+          appBar: AppBar(
+            bottom: TabBar(
+              tabs: [
+                Tab(text: "Rés 1"),
+                Tab(text: "Rés 4B"),
+                Tab(text: "Rés 4DD"),
               ],
             ),
+            title: Text('Laverie CS'),
           ),
+          body: TabBarView(
+            children: [
+              /*
+              Equipment(
+                  Machine(name: "Machine 1", remaining: Duration(minutes:30, seconds:0))
+              ),
+              */
+              Icon(Icons.directions), // loadMachineLayout()
+              Icon(Icons.directions_transit), // loadMachineLayout()
+              Icon(Icons.directions_bike), // loadMachineLayout()
+            ],
+          ),
+          drawer: Drawer(
+            child: ListView(padding: EdgeInsets.zero, children: <Widget>[
+              DrawerHeader(
+                child: Text(
+                  'Options',
+                  style: TextStyle(fontSize: 18.0),
+                ),
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                ),
+              ),
+              ListTile(
+                title: Text('Notifications'),
+                trailing: Icon(
+                  Icons.notifications,
+                ),
+                onTap: () {
+                  Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                title: Text('Langue'),
+                trailing: Icon(
+                  Icons.language,
+                ),
+                onTap: () {
+                  Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                title: Text('Contactez-nous'),
+                trailing: Icon(
+                  Icons.mail,
+                ),
+                onTap: () {
+                  Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                title: Text('Tutorial'),
+                trailing: Icon(
+                  Icons.border_color,
+                ),
+                onTap: () {
+                  Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                title: Text('Sur l\'appli'),
+                trailing: Icon(
+                  Icons.info,
+                ),
+                onTap: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ]),
+          ),
+        ),
       ),
       title: 'Laverie CS',
       theme: ThemeData(
@@ -34,51 +98,8 @@ class LaverieApp extends StatelessWidget {
       ),
     );
   }
-}
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  Widget loadMachineLayout() {
 
-  final String title;
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter+=2;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.display1,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ),
-    );
   }
 }
