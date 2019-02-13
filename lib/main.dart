@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:laverie_cs_app/widgets/Equipment.dart';
+import 'package:laverie_cs_app/widgets/MachineWidget.dart';
 
 void main() => runApp(LaverieApp());
 
@@ -22,12 +22,8 @@ class LaverieApp extends StatelessWidget {
           ),
           body: TabBarView(
             children: [
-              /*
-              Equipment(
-                  Machine(name: "Machine 1", remaining: Duration(minutes:30, seconds:0))
-              ),
-              */
-              Icon(Icons.directions), // loadMachineLayout()
+              // loadMachineLayout(name: "Machine 1", remaining: Duration(minutes:30, seconds:0)),
+              loadMachineLayout(),
               Icon(Icons.directions_transit), // loadMachineLayout()
               Icon(Icons.directions_bike), // loadMachineLayout()
             ],
@@ -100,6 +96,6 @@ class LaverieApp extends StatelessWidget {
   }
 
   Widget loadMachineLayout() {
-
+    return MachineWidget();
   }
 }

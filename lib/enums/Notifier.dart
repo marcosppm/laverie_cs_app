@@ -1,0 +1,3 @@
+enum Notifier {
+  OK, NETTOYER_FILTRE, APPUYER_START
+}
