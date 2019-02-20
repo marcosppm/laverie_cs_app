@@ -15,22 +15,22 @@ abstract class Machine {
 
   static Machine createMachine(String name, DateTime deadline, String cookie, Notifier notifier) {
     Machine machine;
-    if (name.contains("Washing")) {
+    if (name.contains("Washer")) {
       machine = new WashingMachine(name, deadline, cookie, notifier);
     }
-    if (name.contains("Drying")) {
+    if (name.contains("Dryer")) {
       machine = new DryingMachine(name, deadline, cookie, notifier);
     }
     return machine;
   }
 
-  String get getName => name;
+  get getName => name;
 
-  Duration get getRemaining => remaining;
+  get getRemaining => remaining;
 
-  Notifier get getNotifier => notifier;
+  get getNotifier => notifier;
 
-  void set setNotifier(Notifier notifier) => this.notifier = notifier;
+  set setNotifier(Notifier notifier) => this.notifier = notifier;
 
   void decrement() => remaining = Duration(seconds:remaining.inSeconds - 1);
 

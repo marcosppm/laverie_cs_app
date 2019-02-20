@@ -2,12 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:laverie_cs_app/objects/Machine.dart';
 
 class MachineWidget extends StatefulWidget {
+  Machine machine;
+
+  MachineWidget(this.machine);
+
   @override
-  MachineWidgetState createState() => MachineWidgetState();
+  MachineWidgetState createState() => MachineWidgetState(this.machine);
 }
 
 class MachineWidgetState extends State<MachineWidget> {
-  String str = "Which machine?";
+  Machine machine;
+
+  MachineWidgetState(this.machine);
 
   @override
   Widget build(BuildContext context) {
@@ -15,9 +21,9 @@ class MachineWidgetState extends State<MachineWidget> {
       decoration: BoxDecoration(color: Colors.blueAccent),
       child: Column(
         children: [
-          Image.asset('assets/images/machine_small.jpg'),
-          Text(str),
-          Text('Time'),
+          Image.asset(this.machine.getImageURL()),
+          this.machine.getName(),
+          this.machine.getRemaining(),
           RaisedButton(
             child: const Text('Set Machine'),
             onPressed: sayHello,
@@ -30,7 +36,7 @@ class MachineWidgetState extends State<MachineWidget> {
 
   void sayHello() {
     setState(() {
-      str = "Machine 1";
+      this.machine.decrement();
     });
   }
 }

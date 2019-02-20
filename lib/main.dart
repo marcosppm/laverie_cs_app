@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:laverie_cs_app/widgets/MachineWidget.dart';
+import 'package:laverie_cs_app/objects/Machine.dart';
+import 'package:laverie_cs_app/objects/MachineSerializer.dart';
 
 void main() => runApp(LaverieApp());
 
 class LaverieApp extends StatelessWidget {
+  final String machinesFilePath = 'assets/files/time_res1.txt';
+  List<Machine> machines;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -96,6 +101,8 @@ class LaverieApp extends StatelessWidget {
   }
 
   Widget loadMachineLayout() {
-    return MachineWidget();
+    print("oi");
+    this.machines = MachineSerializer.getMachines(machinesFilePath);
+    return MachineWidget(this.machines[0]);
   }
 }
