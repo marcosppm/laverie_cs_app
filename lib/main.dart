@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:laverie_cs_app/widgets/MachineWidget.dart';
 import 'package:laverie_cs_app/objects/Machine.dart';
-import 'package:laverie_cs_app/objects/MachineSerializer.dart';
+import 'package:laverie_cs_app/enums/NotifierManager.dart';
 
 void main() => runApp(LaverieApp());
 
 class LaverieApp extends StatelessWidget {
   final String machinesFilePath = 'assets/files/time_res1.txt';
-  List<Machine> machines;
+  //TODO one array per residence
+  List<MachineWidget> machinesWidgets;
 
   @override
   Widget build(BuildContext context) {
+    machinesWidgets = [];
+
     return MaterialApp(
       home: DefaultTabController(
         length: 3,
@@ -28,9 +31,9 @@ class LaverieApp extends StatelessWidget {
           body: TabBarView(
             children: [
               // loadMachineLayout(name: "Machine 1", remaining: Duration(minutes:30, seconds:0)),
-              loadMachineLayout(),
-              Icon(Icons.directions_transit), // loadMachineLayout()
-              Icon(Icons.directions_bike), // loadMachineLayout()
+              loadMachinesLayout(),
+              loadMachinesLayout(),
+              loadMachinesLayout(), // Icon(Icons.directions_bike)
             ],
           ),
           drawer: Drawer(
@@ -100,9 +103,34 @@ class LaverieApp extends StatelessWidget {
     );
   }
 
-  Widget loadMachineLayout() {
-    print("oi");
-    this.machines = MachineSerializer.getMachines(machinesFilePath);
-    return MachineWidget(this.machines[0]);
+  Container loadMachinesLayout() {
+    //TODO Scroller, improve the views
+    int totalMachines = 4;
+    int columns = 2;
+    int rows = (totalMachines / columns).round();
+
+    List<Row> rowsWidgets = [];
+    int index = 0;
+    for (int i = 0; i < rows; i++) {
+      for (int j = 0; j < columns; j++) {
+        index = i * columns + j;
+        machinesWidgets.add(
+          MachineWidget(
+            Machine.createMachine("Dryer", DateTime(1,1,1), "XXXX", NotifierManager.getNotifier("OK"))
+          )
+        );
+      }
+      if (index < totalMachines) {
+        rowsWidgets.add(Row(children: [machinesWidgets[index - 1], machinesWidgets[index]]));
+      } else {
+        rowsWidgets.add(Row(children: [machinesWidgets[index]]));
+      }
+    }
+    Column col = Column(children: rowsWidgets);
+
+    return Container(
+      decoration: BoxDecoration(color: Colors.blueAccent),
+      child: col,
+    );
   }
 }

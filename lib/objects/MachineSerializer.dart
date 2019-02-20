@@ -5,13 +5,15 @@ import 'dart:convert';
 import 'dart:async' show Future;
 import 'package:flutter/services.dart' show rootBundle;
 
+import 'package:path_provider/path_provider.dart';
+
 import 'Machine.dart';
 import 'package:laverie_cs_app/enums/NotifierManager.dart';
 import 'package:laverie_cs_app/enums/Notifier.dart';
 import 'package:laverie_cs_app/objects/WashingMachine.dart';
 
 class MachineSerializer {
-  static List<Machine> getMachines(String path) {
+  /*static List<Machine> getMachines(String path) {
     File file = new File(path);
     List<Machine> machines = [];
     List<Object> args = [];
@@ -37,8 +39,9 @@ class MachineSerializer {
 
     return machines;
   }
-
-  /*static List<Machine> getMachines(String path) {
+*/
+  /*
+  static List<Machine> getMachines(String path) {
     List<Machine> machines = [];
     List<Object> args = [];
 
@@ -57,14 +60,33 @@ class MachineSerializer {
     });
     print(machines.length);
 
-      */ /*Object arg = _getArgument(line);
+      /*Object arg = _getArgument(line);
       if (arg != '') args.add(arg);
-      else machines.add(Machine.createMachine(args[0], args[1], args[2], args[3]));*/ /*
-  }
-
-  static Future<String> loadAsset() async {
-    return await rootBundle.loadString('assets/files/time_res1.txt');
+      else machines.add(Machine.createMachine(args[0], args[1], args[2], args[3]));*/
   }*/
+
+  static Future<String> readMachines(String path) {
+    print(path);
+    String data = "x";
+    print(data);
+
+    File file = new File('assets/files/time_res1.txt');
+    file.readAsString().then((String contents) {
+      print("Hey" + contents);
+    });
+
+    return rootBundle.loadString('assets/files/time_res1.txt');
+    /*
+    loadAsset().then((String result) {
+      data = result;
+      print(data);
+    });
+    print(machines.length);
+    */
+    /*Object arg = _getArgument(line);
+      if (arg != '') args.add(arg);
+      else machines.add(Machine.createMachine(args[0], args[1], args[2], args[3]));*/
+  }
 
   static Object _getArgument(String line) {
     Object arg;

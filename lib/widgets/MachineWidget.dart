@@ -22,8 +22,8 @@ class MachineWidgetState extends State<MachineWidget> {
       child: Column(
         children: [
           Image.asset(this.machine.getImageURL()),
-          this.machine.getName(),
-          this.machine.getRemaining(),
+          Text(this.machine.getName),
+          Text(this.machine.getRemaining.toString()),
           RaisedButton(
             child: const Text('Set Machine'),
             onPressed: sayHello,

@@ -7,6 +7,6 @@ class WashingMachine extends Machine {
 
   @override
   String getImageURL() {
-    return 'assets/images/washing_small.jpg';
+    return 'assets/images/washer_small.jpg';
   }
 }
