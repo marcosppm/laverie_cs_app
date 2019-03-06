@@ -12,8 +12,17 @@ class MachineWidget extends StatefulWidget {
 
 class MachineWidgetState extends State<MachineWidget> {
   Machine machine;
+  Duration remaining;
 
   MachineWidgetState(this.machine);
+
+  @override
+  void initState() {
+    super.initState();
+    setState(() {
+      this.remaining = this.machine.getRemaining();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,11 +32,10 @@ class MachineWidgetState extends State<MachineWidget> {
         children: [
           Image.asset(this.machine.getImageURL()),
           Text(this.machine.getName),
-          Text(this.machine.getRemaining.toString()),
+          Text(remainingToString()),
           RaisedButton(
             child: const Text('Set Machine'),
             onPressed: sayHello,
-
           )
         ],
       ),
@@ -36,7 +44,15 @@ class MachineWidgetState extends State<MachineWidget> {
 
   void sayHello() {
     setState(() {
-      this.machine.decrement();
+      decrement();
     });
+  }
+
+  void decrement() {
+    remaining = Duration(seconds:remaining.inSeconds - 1);
+  }
+
+  String remainingToString() {
+    return remaining.toString().substring(0, 8);
   }
 }

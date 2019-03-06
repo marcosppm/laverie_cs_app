@@ -5,13 +5,11 @@ import 'DryingMachine.dart';
 
 abstract class Machine {
   String name;
-  Duration remaining;
+  DateTime deadline;
   String cookie;
   Notifier notifier;
 
-  Machine(this.name, DateTime deadline, this.cookie, this.notifier) {
-    this.remaining = deadline.difference(new DateTime.now());
-  }
+  Machine(this.name, this.deadline, this.cookie, this.notifier);
 
   static Machine createMachine(String name, DateTime deadline, String cookie, Notifier notifier) {
     Machine machine;
@@ -26,15 +24,21 @@ abstract class Machine {
 
   get getName => name;
 
-  get getRemaining => remaining;
+  get getDeadline => deadline;
 
   get getNotifier => notifier;
 
   set setNotifier(Notifier notifier) => this.notifier = notifier;
 
-  void decrement() => remaining = Duration(seconds:remaining.inSeconds - 1);
+  Duration getRemaining() {
+    DateTime now = new DateTime.now();
+    print("diff: " + deadline.difference(now).toString());
+    print("deadl: " + deadline.toString());
+    print("now: " + now.toString());
+    return deadline.difference(new DateTime.now());
+  }
 
-  bool isBusy() => (remaining.inSeconds > 0);
+  bool isBusy() => (getRemaining().inSeconds > 0);
 
   bool hasProgrammed(String cookie) => (cookie == this.cookie);
 
@@ -42,5 +46,5 @@ abstract class Machine {
 
   @override
   String toString() =>
-      '$name: il reste ${remaining.toString()}';
+      '$name: il reste ${getRemaining().toString()}';
 }

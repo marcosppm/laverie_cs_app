@@ -14,7 +14,7 @@
          FlutterApplication and put your custom class here. -->
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="laverie_cs_app"
+        android:label="Laverie CS"
         android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"
