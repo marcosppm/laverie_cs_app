@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:laverie_cs_app/objects/Machine.dart';
+import 'package:laverie_cs_app/widgets/MachineDecorator.dart';
 
 class MachineWidget extends StatefulWidget {
   Machine machine;
@@ -13,6 +14,7 @@ class MachineWidget extends StatefulWidget {
 class MachineWidgetState extends State<MachineWidget> {
   Machine machine;
   Duration remaining;
+  MachineDecorator decorator;
 
   MachineWidgetState(this.machine);
 
@@ -20,6 +22,7 @@ class MachineWidgetState extends State<MachineWidget> {
   void initState() {
     super.initState();
     setState(() {
+      this.decorator = MachineDecorator(this.machine);
       this.remaining = this.machine.getRemaining();
     });
   }
@@ -27,15 +30,22 @@ class MachineWidgetState extends State<MachineWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(color: Colors.blueAccent),
+      padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
+      decoration: BoxDecoration(
+          color: decorator.getColor(),
+          borderRadius: new BorderRadius.circular(15.0)),
       child: Column(
         children: [
           Image.asset(this.machine.getImageURL()),
           Text(this.machine.getName),
           Text(remainingToString()),
-          RaisedButton(
-            child: const Text('Set Machine'),
-            onPressed: sayHello,
+          ButtonTheme(
+            minWidth: 125.0,
+            buttonColor: Colors.white70,
+            child: RaisedButton(
+              child: Text(decorator.getBtnString()),
+              onPressed: sayHello,
+            ),
           )
         ],
       ),

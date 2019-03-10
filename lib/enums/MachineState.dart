@@ -1,0 +1,3 @@
+enum MachineState {
+  BUSY, FREE
+}

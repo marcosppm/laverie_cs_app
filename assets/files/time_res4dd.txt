@@ -1,0 +1,19 @@
+WSH: 1
+deadline: 2019-02-17 13:27:00.000
+cookie: XXXX
+notify: OK
+
+WSH: 1
+deadline: 2019-03-12 13:27:00.000
+cookie: XXXX
+notify: OK
+
+DRY: 1
+deadline: 2019-02-20 18:50:00.000
+cookie: 4C5E
+notify: OK
+
+DRY: 1
+deadline: 2019-03-08 18:50:00.000
+cookie: 4C5E
+notify: OK

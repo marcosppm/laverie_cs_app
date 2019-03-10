@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:laverie_cs_app/widgets/MachinesLayoutWidget.dart';
+import 'package:laverie_cs_app/objects/Residence.dart';
 
 void main() => runApp(LaverieApp());
 
 class LaverieApp extends StatelessWidget {
-  final String machinesFilePath =  'assets/files/time_res1.txt';
+  List<Residence> residences;
 
   @override
   Widget build(BuildContext context) {
+    this.residences = initResidences();
     return MaterialApp(
       home: DefaultTabController(
         length: 3,
@@ -15,18 +17,18 @@ class LaverieApp extends StatelessWidget {
           appBar: AppBar(
             bottom: TabBar(
               tabs: [
-                Tab(text: "Rés 1"),
-                Tab(text: "Rés 4B"),
-                Tab(text: "Rés 4DD"),
+                Tab(text: residences[0].abbreviation),
+                Tab(text: residences[1].abbreviation),
+                Tab(text: residences[2].abbreviation),
               ],
             ),
             title: Text('Laverie CS'),
           ),
           body: TabBarView(
             children: [
-              MachinesLayoutWidget(),
-              MachinesLayoutWidget(),
-              MachinesLayoutWidget(), //Icon(Icons.directions_bike)
+              MachinesLayoutWidget(residences[0]),
+              MachinesLayoutWidget(residences[1]),
+              MachinesLayoutWidget(residences[2]) //Icon(Icons.directions_bike)
             ],
           ),
           drawer: Drawer(
@@ -94,6 +96,14 @@ class LaverieApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
     );
+  }
+
+  List<Residence> initResidences() {
+    List<Residence> residences = [];
+    residences.add(Residence("Résidence 1", "RES 1", "assets/files/time_res1.txt"));
+    residences.add(Residence("Résidence 4B", "RES 4B", "assets/files/time_res4b.txt"));
+    residences.add(Residence("Résidence 4DD", "RES 4DD", "assets/files/time_res4dd.txt"));
+    return residences;
   }
 }
 

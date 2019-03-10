@@ -1,5 +1,6 @@
 // Machine à laver OU à sécher (IMPLEMENTS)
 import 'package:laverie_cs_app/enums/Notifier.dart';
+import 'package:laverie_cs_app/enums/MachineState.dart';
 import 'WashingMachine.dart';
 import 'DryingMachine.dart';
 
@@ -8,6 +9,7 @@ abstract class Machine {
   DateTime deadline;
   String cookie;
   Notifier notifier;
+  MachineState state;
 
   Machine(this.name, this.deadline, this.cookie, this.notifier);
 
@@ -19,6 +21,9 @@ abstract class Machine {
     if (name.contains("Dryer")) {
       machine = new DryingMachine(name, deadline, cookie, notifier);
     }
+
+    bool busy = machine.isBusy();
+    machine.state = busy ? MachineState.BUSY : MachineState.FREE;
     return machine;
   }
 
@@ -29,6 +34,8 @@ abstract class Machine {
   get getNotifier => notifier;
 
   set setNotifier(Notifier notifier) => this.notifier = notifier;
+
+  set setState(MachineState state) => this.state = state;
 
   Duration getRemaining() {
     DateTime now = new DateTime.now();
